@@ -1,6 +1,6 @@
 class UsersController < ApplicationController 
     
-  before_action :require_login, only: #things go here 
+  before_action :require_login, only: [:new] #things go here 
   
   def new 
     render :new 
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   
   private 
   def user_params
-    params.require(:user).permit(:user_name, :password)
+    params.require(:users).permit(:user_name, :password)
   end 
   
 end 

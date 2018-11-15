@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   
-  before_action :current_user, only: [:new, :destroy]
+  before_action :require_login, only: [:destroy]
   
   def new
     redirect_to new_session_url
@@ -23,6 +23,12 @@ class SessionsController < ApplicationController
       redirect_to cats_url
     else 
       render json: 'Invalid credentials', status: 418
+    end 
+  end 
+  
+  def require_login 
+    unless current_user 
+      redirect_to session_url
     end 
   end 
   
