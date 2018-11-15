@@ -3,7 +3,8 @@ class SessionsController < ApplicationController
   before_action :require_login, only: [:destroy]
   
   def new
-    redirect_to new_session_url
+    # redirect_to new_session_url
+    render :new
   end 
   
   def destroy
@@ -14,11 +15,10 @@ class SessionsController < ApplicationController
   end 
   
   def create
-    user = User.find_by(username: params[:user][:user_name])
-    if user && BCrypt::Password.new(user.password_digest)
-      .is_password?(params[:user][:password])
+    user = User.find_by(user_name: params[:users][:user_name])
+    if user && BCrypt::Password.new(user.password_digest).is_password?(params[:users][:password])
       login!(user)
-      session[:session_token] = user.reset_session_token!
+      # session[:session_token] = user.reset_session_token!
       user.save!
       redirect_to cats_url
     else 

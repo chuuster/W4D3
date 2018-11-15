@@ -6,4 +6,7 @@
   <% end %>
 </ul>
 
+<% if !current_user %>
+  <h1> Welcome  </h1>
+<% end %>
 <a href="<%= new_cat_url %>">Create cat</a>
